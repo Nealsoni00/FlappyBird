@@ -1,0 +1,40 @@
+canvas {
+  position: fixed;
+  left: 45px;
+  top: 35px;
+  background-image: url("foreground.jpg");
+  border: 1px solid black;
+}
+
+html {
+  background-color: light blue;
+}
+
+h1 {
+  left: 250px;
+  top:0;
+  position: fixed;
+  font-size: 18;
+}
+h2 {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: -80px;
+  font-size: 100;
+  color: white;
+  text-shadow: 0 0 3px black;
+}
+
+img {
+  display: none;
+}
+
+.center {
+  position: fixed;
+  left: 45px;
+  top: 35px;
+  width: 500px;
+  height: 10px;
+  z-index: 1000;
+}
