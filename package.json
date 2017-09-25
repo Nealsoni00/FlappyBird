@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.4"
-  },
+    },
   "engines": {
     "node": "8.2.1"
   }

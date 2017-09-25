@@ -1,14 +1,66 @@
 <html>
 <link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.css">
+
 <body>
 <img id="bird" src="flappybird.png">
 <img id="tubedown" src="tubedown.png">
 <img id="tubeup" src="tubeup.png">
-<div class = "center">
-  <h2 id = "score">0</h2>
+
+
+<div class = "ui modal">
+  <div class = "header">Enter Username</div>
+  <div class = "description">If you are a returning player, please enter your previous username. Otherwise, create a new one.</div>
+  <div class="ui input">
+    <input type="text" placeholder="Username">
+    <div class = "ui button">Enter</div>
+  </div>
 </div>
+
+<div class = "container">
+<div class = "canvas container">
+  <h2 id = "score">0</h2>
+  
 <canvas width="500" height="700"></canvas>
+</div>
+
+
+<div class = "tableContainer">
+
+<table class="ui celled table">
+  <thead>
+    <th>Name</th>
+    <th>High Score</th>
+  </thead>
+  <tbody  id = "appendHere">
+   
+  
+ </tbody>
+
+</table>
+</div>
+
+</div>
+
+<!-- <input class = "username" placeholder="Name"></input> -->
 </body>
+
+<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyArzWpam5aLpZpAtlpSGjPTMcDUB-HO7Fo",
+    authDomain: "flappy-a29fa.firebaseapp.com",
+    databaseURL: "https://flappy-a29fa.firebaseio.com",
+    projectId: "flappy-a29fa",
+    storageBucket: "",
+    messagingSenderId: "564378092431"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="jquery-2.2.1.min.js"></script>
+<script src="semantic.js"></script>
+
 <script src="app2.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 </html>

@@ -1,4 +1,4 @@
-running = true;
+running = false;
 score = 0;
 function bird() {
   this.y = 10;
@@ -17,6 +17,12 @@ function bird() {
   this.dead = function() {
     dead.play()
     running = false;
+    console.log(score)
+    console.log(highScore)
+    if(score > highScore) {
+      highScore = score
+      writeScore()      
+    } 
     window.alert("GAME OVER! Final Score = " + score)
     restart();
   }
@@ -135,6 +141,10 @@ function draw() {
 
   update();
 
+  // $('body')
+
+;
+
   window.requestAnimationFrame(draw);
 
   var scoreElement = document.getElementById("score");
@@ -148,4 +158,110 @@ function restart (){
   location.reload();
 }
 
+$(".button").click(function(){
+   username = $("input").val()
+  console.log(username)
+  var check = containsObject()
+  console.log(check)
+ 
+
+
+  $('.modal').modal('hide')
+  running = true;
+  
+})
 draw();
+var database = firebase.database();
+var namesAndScores = []
+
+
+$(document).ready(function(){
+  $('.modal').modal('show')
+
+  readDB()      
+    // ...
+  });
+
+
+  var username;
+  var highScore;
+  function readDB() {
+    return firebase.database().ref('/usernames/').once('value').then(function(snapshot) {
+      var content = (snapshot.val())
+      Object.keys(content).forEach(function(key) {
+         username = content[key].username
+         var highScore = content[key].score
+        var nameAndScore = {
+          username : username,
+          highScore : highScore,
+          id : key
+        }
+        namesAndScores.push(nameAndScore)
+  
+        });
+        namesAndScores.sort(sort_by('highScore', false, parseInt));
+        
+        addToPage()
+        console.log(namesAndScores)
+
+  }
+
+)
+  }
+  var sort_by = function(field, reverse, primer){
+    var key = function (x) {return primer ? primer(x[field]) : x[field]};
+ 
+    return function (a,b) {
+     var A = key(a), B = key(b);
+     return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];                  
+    }
+ }
+  function addToPage(){
+    for (var i = 0; i < namesAndScores.length; i++) {
+      $('#appendHere').append($("<tr><td>" + (capitalize(namesAndScores[i].username)) + "</td><td>" + namesAndScores[i].highScore + "</td></tr>"))
+    }
+  }
+  function writeScore() {
+    if(containsObject()) {
+      firebase.database().ref('usernames/' + id).set({
+        username: username,
+        score: score,
+      });
+    } else {
+      console.log('new user')
+      firebase.database().ref('usernames/').push({
+        username: username,
+        score: score,
+      });
+    }
+  
+    console.log('hi')
+  }
+  function capitalize(s)
+  {
+      return s && s[0].toUpperCase() + s.slice(1);
+  }
+  function updateScore() {
+    firebase.database().ref('usernames/').push({
+      username: username,
+      score: score,
+    })
+
+  }
+var id;
+  function containsObject() {
+    var i;
+    for (i = 0; i < namesAndScores.length; i++) {
+      console.log(namesAndScores[i].username)
+        if (namesAndScores[i].username === username) {
+          id = namesAndScores[i].id
+          console.log(id)
+          highScore = namesAndScores[i].highScore
+            return true;
+        } else {
+          highScore = score;
+        }
+    }
+
+    return false;
+}
