@@ -33,11 +33,11 @@ h1 {
   font-size: 18;
 }
 h2 {
-  position: absolute;
-  width: 100%;
-  text-align: center;
+  position: relative;
+  left: 50%;
+  /* text-align: center; */
   top: 20px;
-  font-size: 150;
+  font-size: 50px;
   color: white;
   text-shadow: 0 0 3px black;
 }
@@ -61,12 +61,11 @@ img {
 
 }
 
-.canvasContainer {
-  /* display: flex; */
+/* .canvasContainer { */
+  display: flex;
 }
 
 #score {
-  /* position: relative; */
-
-  /* flex: 1; */
+ 
+  /* flex: 1;  */
 }

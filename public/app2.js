@@ -155,20 +155,26 @@ var b = new bird();
 var p = new pipe();
 
 function restart (){
-  location.reload();
+  score = 0;
+  b = new bird();
+  p = new pipe();
+  // location.reload();
+  running = true;
 }
 
 $(".button").click(function(){
    username = $("input").val()
-  console.log(username)
   var check = containsObject()
-  console.log(check)
  
-
-
+if (username !== "") {
   $('.modal').modal('hide')
   running = true;
   
+} else {
+  window.alert("Username cannot be empty.")
+}
+
+ 
 })
 draw();
 var database = firebase.database();
@@ -217,7 +223,7 @@ $(document).ready(function(){
     }
  }
   function addToPage(){
-    for (var i = 0; i < namesAndScores.length; i++) {
+    for (var i = 0; i < 10; i++) {
       $('#appendHere').append($("<tr><td>" + (capitalize(namesAndScores[i].username)) + "</td><td>" + namesAndScores[i].highScore + "</td></tr>"))
     }
   }
